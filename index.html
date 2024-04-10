@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="ShoppingListCheckOff">
+<head>
+  <meta charset="UTF-8">
+  <title>Shppping List 1</title>
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <style>
+    .emptyMessage {
+        font-weight: bold;
+        color: red;
+        font-size: 1.2em;
+      }
+      li {
+        margin-bottom: 7px;
+        font-size: 1.2em;
+      }
+      li > button {
+        margin-left: 6px;
+      }
+      button > span {
+        color: green;
+      }
+      h1{
+        font-size: 36px;
+        border-bottom: 1px solid #d2d2d2;
+        padding-bottom: 15px;
+        padding-top: 20px;
+      }
+      .spstyle{
+        border: 1px solid #e3e3e3;
+        padding: 10px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+  </style>
+  <script src="angular.min.js"></script>
+  <script src="app.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="row">
+      <div class="col-md-12">
+        <h1>Shopping List Check Off</h1>
+      </div>
+    </header>
+
+    <div class="row">
+      <div class="col-md-6 spstyle">
+        <div ng-controller="ToBuyController as listToBuy">
+          <h2>To Buy</h2>
+          <ol>
+            <div ng-show="listToBuy.items.length > 0">
+              <li ng-repeat="item in listToBuy.items;">
+                {{ item.quantity }} of {{ item.name }}
+                <button class="btn btn-default" ng-click="listToBuy.checkOff($index);"><span class="glyphicon glyphicon-ok"></span> Bought</button>
+              </li>
+            </div>
+            <div ng-show="listToBuy.items.length == 0">
+              <p>Bought all the items!</p>
+            </div>
+          </ol>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div ng-controller="AlreadyBoughtController as listBought">
+          <h2>Already Bought</h2>
+          <div ng-show="listBought.items.length > 0">
+            <ol>
+              <li ng-repeat="item in listBought.items;">{{ item.quantity }} of {{ item.name }}</li>
+            </ol>
+          </div>
+          <div ng-show="listBought.items.length == 0">
+            <p class="emptyMessage">Nothing bought yet!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
